@@ -141,7 +141,19 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
+): Int {
+    var threatCounter = 0
+    fun BishopKills (x: Int, y: Int, xx: Int, yy: Int): Boolean{
+
+        var xDiff = kotlin.math.abs(x - xx)
+        var yDiff = kotlin.math.abs(y - yy)
+        return if (xDiff == yDiff) true else false
+
+    }
+    if (kingX == rookX || kingY == rookY) threatCounter+=1
+    if (BishopKills(kingX, kingY, bishopX, bishopY) == true) threatCounter+=2
+    return threatCounter
+}
 
 /**
  * Простая (2 балла)
@@ -151,7 +163,21 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    fun IsExists (side1: Double, side2: Double,side3: Double): Boolean {
+        if (side1 < side2 + side3 ) return true else return false
+    }
+    if ((IsExists(a,b,c) && IsExists(b,c,a) && IsExists(c,a,b)) == false) return -1
+    fun IsSqr (g: Double, k1 : Double, k2: Double): Boolean {
+        if (g*g == k1*k1 + k2*k2) return true else return false
+    }
+    if (IsSqr(a,b,c) || IsSqr(b,a,c) || IsSqr(c,b,a)) return 1
+    fun IsObtuse (side1: Double, side2: Double,side3: Double): Boolean {
+        if (side1*side1 > side2*side2 + side3*side3) return true else return false
+    }
+    if (IsObtuse(a,b,c) || IsObtuse(b,a,c) || IsObtuse(c,b,a)) return 2
+    return 0
+}
 
 /**
  * Средняя (3 балла)
