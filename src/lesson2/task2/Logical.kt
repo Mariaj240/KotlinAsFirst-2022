@@ -3,6 +3,8 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * Пример
@@ -18,7 +20,12 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean {
+    val Sum1 = (number % 10) + (number % 100 / 10)
+    val Sum2 = (number % 1000 / 100) + (number / 1000)
+    return if (Sum1 == Sum2) true else false
+}
+
 
 /**
  * Простая (2 балла)
@@ -27,7 +34,15 @@ fun isNumberHappy(number: Int): Boolean = TODO()
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
+    val checking = true
+    fun Diagonally(x: Int, y: Int, xx: Int, yy: Int): Boolean {
+        val dX = kotlin.math.abs(x - xx)
+        val dY = kotlin.math.abs(y - yy)
+        return if (dX == dY) true else false
+    }
+    return if ((x1 == x2 || y1 == y2) || Diagonally(x1,y1,x2,y2)==true) checking else false
+}
 
 
 /**
@@ -48,7 +63,7 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean = sqrt((x2 -x1).pow(2) + (y2 - y1).pow(2)) + r1 <= r2
 
 /**
  * Средняя (3 балла)
