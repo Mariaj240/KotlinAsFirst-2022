@@ -70,16 +70,17 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     if (age < 10) {
-        if (age == 1) return "${age} год"
-        if (age in 2..4) return "${age} года"
+        if (age == 1) return "$age год"
+        if (age in 2..4) return "$age года"
         return "${age} лет"
     }
-    if (age>10) {
-        if (age % 100 in 11..19) return "${age} лет"
-        if (age % 10 == 0) return "${age} лет"
-        if (age % 10 in 2..4) return "${age} года"
-        if (age % 10 == 1) return "${age} год"
-        return "${age} лет"
+    if (age>=10) {
+        if (age % 10 == 0) return "$age лет"
+        if (age % 100 in 11..19) return "$age лет"
+        if (age % 10 == 0) return "$age лет"
+        if (age % 10 in 2..4) return "$age года"
+        if (age % 10 == 1) return "$age год"
+        return "$age лет"
     }
     return ""}
 
@@ -164,18 +165,18 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    fun IsExists (side1: Double, side2: Double,side3: Double): Boolean {
+    fun exists (side1: Double, side2: Double,side3: Double): Boolean {
         if (side1 < side2 + side3 ) return true else return false
     }
-    if ((IsExists(a,b,c) && IsExists(b,c,a) && IsExists(c,a,b)) == false) return -1
-    fun IsSqr (g: Double, k1 : Double, k2: Double): Boolean {
+    if ((exists(a,b,c) && exists(b,c,a) && exists(c,a,b)) == false) return -1
+    fun isSqr (g: Double, k1 : Double, k2: Double): Boolean {
         if (g*g == k1*k1 + k2*k2) return true else return false
     }
-    if (IsSqr(a,b,c) || IsSqr(b,a,c) || IsSqr(c,b,a)) return 1
-    fun IsObtuse (side1: Double, side2: Double,side3: Double): Boolean {
+    if (isSqr(a,b,c) || isSqr(b,a,c) || isSqr(c,b,a)) return 1
+    fun isObtuse (side1: Double, side2: Double,side3: Double): Boolean {
         if (side1*side1 > side2*side2 + side3*side3) return true else return false
     }
-    if (IsObtuse(a,b,c) || IsObtuse(b,a,c) || IsObtuse(c,b,a)) return 2
+    if (isObtuse(a,b,c) || isObtuse(b,a,c) || isObtuse(c,b,a)) return 2
     return 0
 }
 
