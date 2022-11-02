@@ -35,12 +35,12 @@ fun isNumberHappy(number: Int): Boolean {
  * Считать, что ферзи не могут загораживать друг друга.
  */
 fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
-    fun Diagonally(x: Int, y: Int, xx: Int, yy: Int): Boolean {
+    fun diagonally(x: Int, y: Int, xx: Int, yy: Int): Boolean {
         val dX = kotlin.math.abs(x - xx)
         val dY = kotlin.math.abs(y - yy)
-        return (dX == dY)
+        return dX == dY
     }
-    return if ((x1 == x2 || y1 == y2) || Diagonally(x1,y1,x2,y2)) true else false
+    return if ((x1 == x2 || y1 == y2) || diagonally(x1,y1,x2,y2)) true else false
 }
 
 
@@ -73,8 +73,5 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    if (a <= r && b <= s || a <= r && c <= s || a <= s && c <= r || a <= s && b <= r || b <= r && c <= s || b <= s && c <= r)
-            return true
-    return false
-}
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = a <= r && b <= s || a <= r && c <= s || a <= s &&
+        c <= r || a <= s && b <= r || b <= r && c <= s || b <= s && c <= r

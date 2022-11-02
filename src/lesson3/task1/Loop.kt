@@ -103,21 +103,25 @@ fun fib(n: Int): Int {
 }
 
 /**
+ * Проверка на простоту числа.
+ */
+fun primeNumber(number: Int): Boolean {
+    if (number < 2) return false
+    if (number == 2) return true
+    if (number % 2 == 0) return false
+    for (m in 3..(number / 2)) {
+        if (number % m == 0) return false
+    }
+    return true
+}
+
+/**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    fun simpleNumber(number: Int): Boolean {
-        if (number < 2) return false
-        if (number == 2) return true
-        if (number % 2 == 0) return false
-        for (m in 3..(number / 2)) {
-            if (number % m == 0) return false
-        }
-        return true
-    }
-    if (simpleNumber(n) == true) return n
+    if (primeNumber(n)) return n
     for (i in 2..n / 2) {
         if (n % i == 0) return i
     }
@@ -161,16 +165,7 @@ fun collatzSteps(x: Int): Int = TODO()
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    fun simpleNumber(number: Int): Boolean {
-        if (number < 2) return false
-        if (number == 2) return true
-        if (number % 2 == 0) return false
-        for (m in 3..(number / 2)) {
-            if (number % m == 0) return false
-        }
-        return true
-    }
-    return if ( n == m && simpleNumber(n) == true ) n else (m * n / euAlgo(m,n))
+    return if (n == m && primeNumber(n)) n else (m * n / euAlgo(m, n))
 }
 
 /**
@@ -184,7 +179,6 @@ fun euAlgo(m: Int, n: Int): Int {
         }
     return a + b
 }
-
 
 
 /**

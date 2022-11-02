@@ -82,7 +82,8 @@ fun ageDescription(age: Int): String {
         if (age % 10 == 1) return "$age год"
         return "$age лет"
     }
-    return ""}
+    return ""
+}
 
 
 /**
@@ -101,10 +102,10 @@ fun timeForHalfWay(
     val s2 = t2 * v2
     val s3 = t3 * v3
     val s = s1 + s2 + s3
-    val halfS = s/2.0
-    if (halfS <= s1) return (halfS/v1)
-    if ((halfS > s1) && (halfS <= (s2+s1))) return (t1 + t2 -((s1 + s2 - halfS)/v2))
-    return (t1 + t2 + t3 - ((s - halfS)/v3))
+    val halfS = s / 2.0
+    if (halfS <= s1) return (halfS / v1)
+    if (halfS > s1 && halfS <= (s2 + s1)) return (t1 + t2 - (s1 + s2 - halfS) / v2)
+    return (t1 + t2 + t3 - (s - halfS) / v3)
 }
 
 
@@ -144,15 +145,15 @@ fun rookOrBishopThreatens(
     bishopX: Int, bishopY: Int
 ): Int {
     var threatCounter = 0
-    fun BishopKills (x: Int, y: Int, xx: Int, yy: Int): Boolean{
+    fun bishopKills(x: Int, y: Int, xx: Int, yy: Int): Boolean {
 
         var xDiff = kotlin.math.abs(x - xx)
         var yDiff = kotlin.math.abs(y - yy)
-        return if (xDiff == yDiff) true else false
+        return xDiff == yDiff
 
     }
-    if (kingX == rookX || kingY == rookY) threatCounter+=1
-    if (BishopKills(kingX, kingY, bishopX, bishopY) == true) threatCounter+=2
+    if (kingX == rookX || kingY == rookY) threatCounter += 1
+    if (bishopKills(kingX, kingY, bishopX, bishopY) == true) threatCounter += 2
     return threatCounter
 }
 
