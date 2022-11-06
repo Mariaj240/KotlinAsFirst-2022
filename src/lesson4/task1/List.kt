@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 // Урок 4: списки
@@ -177,7 +178,18 @@ fun times(a: List<Int>, b: List<Int>): Int {
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int = TODO()
+
+fun polynom(p: List<Int>, x: Int): Int {
+    var c = 0
+    var k = 0
+    var index = p.indexOf(k)
+    for (i in 0 until p.size) {
+        c += p[i] * (x.toDouble()).pow(k).toInt()
+        k += 1
+    }
+    return c
+}
+
 
 /**
  * Средняя (3 балла)
@@ -189,7 +201,26 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    for (i in 1 until list.size) {
+        list[i] = list[i] + list[i - 1]
+    }
+    return list
+}
+
+/**
+ * Проверка на простоту числа.
+ */
+fun primeNumber(number: Int): Boolean {
+    if (number < 2) return false
+    if (number == 2) return true
+    if (number % 2 == 0) return false
+    for (m in 3..(number / 2)) {
+        if (number % m == 0) return false
+    }
+    return true
+}
+
 
 /**
  * Средняя (3 балла)
@@ -198,7 +229,20 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+
+
+fun factorize(n: Int): List<Int> {
+    val list = mutableListOf<Int>()
+    var number = n
+    if (primeNumber(n)) return listOf(n)
+    for (i in 2 until n / 2) {
+        while ( number % i == 0 ) {
+            list.add(i)
+            number /= i
+        }
+    }
+    return list
+}
 
 /**
  * Сложная (4 балла)
@@ -207,7 +251,19 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String {
+    val list = mutableListOf<Int>()
+    var number = n
+
+    if (primeNumber(n)) return n.toString()
+    for (i in 2 until n / 2) {
+        while ( number % i == 0 ) {
+            list.add(i)
+            number /= i
+        }
+    }
+    return list.joinToString ( "*" )
+}
 
 /**
  * Средняя (3 балла)
@@ -216,7 +272,22 @@ fun factorizeToString(n: Int): String = TODO()
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    val list = mutableListOf<Int>()
+    var number = n
+    if (base == 2) {
+        val base2 = n.toString(2)
+        return listOf(n)
+    } else {
+        if (base > 2) {
+            while (number > 0) {
+                list.add(number % base)
+                number /= base
+            }
+        }
+    }
+    return list.reversed()
+}
 
 /**
  * Сложная (4 балла)
