@@ -122,7 +122,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * Модуль пустого вектора считать равным 0.0.
  */
 fun abs(v: List<Double>): Double {
-    val vec = v.map{ it * it}.sum ()
+    val vec = v.map{ it * it }.sum()
     return sqrt(vec)
 }
 
@@ -235,7 +235,7 @@ fun factorize(n: Int): List<Int> {
     val list = mutableListOf<Int>()
     var number = n
     if (primeNumber(n)) return listOf(n)
-    for (i in 2 until n / 2) {
+    for (i in 2 .. n / 2) {
         while ( number % i == 0 ) {
             list.add(i)
             number /= i
@@ -256,7 +256,7 @@ fun factorizeToString(n: Int): String {
     var number = n
 
     if (primeNumber(n)) return n.toString()
-    for (i in 2 until n / 2) {
+    for (i in 2 ..n / 2) {
         while ( number % i == 0 ) {
             list.add(i)
             number /= i
@@ -275,17 +275,10 @@ fun factorizeToString(n: Int): String {
 fun convert(n: Int, base: Int): List<Int> {
     val list = mutableListOf<Int>()
     var number = n
-    if (base == 2) {
-        val base2 = n.toString(2)
-        return listOf(n)
-    } else {
-        if (base > 2) {
-            while (number > 0) {
-                list.add(number % base)
-                number /= base
+    while (number > 0) {
+        list.add(number % base)
+        number /= base
             }
-        }
-    }
     return list.reversed()
 }
 
