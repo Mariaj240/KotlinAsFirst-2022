@@ -124,8 +124,8 @@ fun whichRookThreatens(
     rookX2: Int, rookY2: Int
 ): Int {
     var threatCounter = 0
-    if (kingX == rookX1 || kingY == rookY1) threatCounter+=1
-    if (kingX == rookX2 || kingY == rookY2) threatCounter+=2
+    if (kingX == rookX1 || kingY == rookY1) threatCounter += 1
+    if (kingX == rookX2 || kingY == rookY2) threatCounter += 2
     return threatCounter
 }
 
@@ -147,8 +147,8 @@ fun rookOrBishopThreatens(
     var threatCounter = 0
     fun bishopKills(x: Int, y: Int, xx: Int, yy: Int): Boolean {
 
-        var xDiff = kotlin.math.abs(x - xx)
-        var yDiff = kotlin.math.abs(y - yy)
+        val xDiff = kotlin.math.abs(x - xx)
+        val yDiff = kotlin.math.abs(y - yy)
         return xDiff == yDiff
 
     }
@@ -169,15 +169,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     fun exists (side1: Double, side2: Double,side3: Double): Boolean {
         if (side1 < side2 + side3 ) return true else return false
     }
-    if ((exists(a,b,c) && exists(b,c,a) && exists(c,a,b)) == false) return -1
+    if ((exists(a, b, c) && exists(b, c, a) && exists(c, a, b)) == false) return -1
     fun isSqr (g: Double, k1 : Double, k2: Double): Boolean {
-        if (g*g == k1*k1 + k2*k2) return true else return false
+        return (g*g == k1*k1 + k2*k2)
     }
-    if (isSqr(a,b,c) || isSqr(b,a,c) || isSqr(c,b,a)) return 1
+    if (isSqr(a, b, c) || isSqr(b, a, c) || isSqr(c, b, a)) return 1
     fun isObtuse (side1: Double, side2: Double,side3: Double): Boolean {
-        if (side1*side1 > side2*side2 + side3*side3) return true else return false
+        return (side1*side1 > side2*side2 + side3*side3)
     }
-    if (isObtuse(a,b,c) || isObtuse(b,a,c) || isObtuse(c,b,a)) return 2
+    if (isObtuse(a, b, c) || isObtuse(b, a, c) || isObtuse(c, b, a)) return 2
     return 0
 }
 

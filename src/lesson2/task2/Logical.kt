@@ -23,7 +23,7 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
 fun isNumberHappy(number: Int): Boolean {
     val Sum1 = (number % 10) + (number % 100 / 10)
     val Sum2 = (number % 1000 / 100) + (number / 1000)
-    return if (Sum1 == Sum2) true else false
+    return (Sum1 == Sum2)
 }
 
 
@@ -40,7 +40,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
         val dY = kotlin.math.abs(y - yy)
         return dX == dY
     }
-    return if ((x1 == x2 || y1 == y2) || diagonally(x1,y1,x2,y2)) true else false
+    return ((x1 == x2 || y1 == y2) || diagonally(x1,y1,x2,y2))
 }
 
 

@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.numberRevert
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -326,7 +327,21 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    val list1 = listOf("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+    val list2 = listOf(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    var num = n
+    val romanLetters = mutableListOf<String>()
+    for (el in list2) {
+        while (num >= el) {
+            num -= el
+            val index = list2.indexOf(el)
+            val index1 = list1[index]
+            romanLetters.add(index1)
+        }
+    }
+    return romanLetters.joinToString("")
+}
 
 /**
  * Очень сложная (7 баллов)
@@ -335,4 +350,75 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val hundreds = listOf(
+        "сто ", "двести ", "триста ", "четыреста ", "пятьсот ", "шестьсот ", "семьсот ", "восемьсот ",
+        "девятьсот "
+    )
+    val decades = listOf(
+        "десять ", "двадцать ", "тридцать ", "сорок ", "пятьдесят ", "шестьдесят ", "семьдесят ",
+        "восемьдесят ", "девяносто "
+    )
+    val fromTenToTwenty = listOf(
+        "одиннадцать ", "двенадцать ", "тринадцать ", "четырнадцать ", "пятнадцать ",
+        "шестнадцать ", "семнадцать ", "восемнадцать ", "девятнадцать "
+    )
+    val fromZeroToTen = listOf("одна ", "две ", "три ", "четыре ", "пять ", "шесть ", "семь ", "восемь ", "девять ")
+    val ones = listOf("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+
+    fun thousands(n: Int): String {
+        var k = n / 1000
+        var ans = ""
+        if (k >= 100) {
+            ans += hundreds[k / 100 - 1]
+        }
+        if (k % 100 in 11..19) {
+            ans += fromTenToTwenty[k % 10 - 1]
+            return ans
+        }
+        if (k / 10 % 10 != 0) {
+            ans += decades[k / 10 % 10 - 1]
+        }
+        if (k % 10 != 0) {
+            ans += fromZeroToTen[k % 10 - 1]
+        }
+        return ans
+    }
+
+    fun wordThousand(n: Int): String {
+        var k = n / 1000
+        if (k % 100 in 11..19) {
+            return "тысяч"
+        }
+        if (k % 10 == 1) {
+            return "тысяча"
+        } else if (k % 10 in 2..4) {
+            return "тысячи"
+        }
+        return "тысяч"
+    }
+
+    fun hundredsDecadesOnes(n: Int): String {
+        var k = n % 1000
+        var ans = ""
+        if (k >= 100) {
+            ans += hundreds[k / 100 - 1]
+        }
+        if (k % 100 in 11..19) {
+            ans += fromTenToTwenty[k % 10 - 1]
+            return ans
+        }
+        if (k % 100 / 10 != 0) {
+            ans += decades[k % 100 / 10 - 1]
+        }
+        if (k % 10 != 0) {
+            ans += ones[k % 10 - 1]
+        }
+        return ans
+    }
+
+    var ans = ""
+    if (n % 1000 == 0) return (thousands(n) + wordThousand(n)).trim()
+    if (n >= 1000) return (thousands(n) + wordThousand(n) + " " + hundredsDecadesOnes(n)).trim()
+    return hundredsDecadesOnes(n).trim()
+}
