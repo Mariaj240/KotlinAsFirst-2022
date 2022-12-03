@@ -101,7 +101,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
     var buildListGrades = mutableMapOf<Int, MutableList<String>>()
     for ((student, grade) in grades) {
         if (grade in buildListGrades.keys) buildListGrades.getValue(grade) += student
-        if (grade !in buildListGrades.keys) buildListGrades[grade] = mutableListOf<String>(student)
+        buildListGrades[grade] = buildListGrades.getOrPut(grade) { mutableListOf<String>(student) }
     }
     return buildListGrades
 }
@@ -119,8 +119,9 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
     for ((key, value) in a) {
         if (key in b.keys) {
-            if (a.getValue(key) != b.getValue(key)) return false
+            if (a[key] != b[key]) return false
         }
+        else return false
     }
     return true
 }
@@ -141,7 +142,7 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
  */
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Map<String, String> {
     for ((key, value) in b) {
-        if (a[key] == b[key] && a[value] == b[value]) a.remove(key)
+        if (a[key] == b[key]) a.remove(key)
     }
     return a
 }
@@ -155,11 +156,10 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Map<Strin
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
     val peopleList = mutableListOf<String>()
-    for (people in a) {
-        for (people1 in b) {
-            if (people == people1) peopleList.add(people)
+    if (a.isEmpty() || b.isEmpty()) return peopleList
+    for (i in 0 until a.size) {
+            if (a[i] == b[i]) peopleList.add(a[i])
         }
-    }
     return peopleList
 }
 
@@ -198,7 +198,17 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+    val map = mutableMapOf<String, MutableList<Double>>()
+    for ((stock, price) in stockPrices) {
+        if (!map.containsKey(stock)) {
+            map[stock] = mutableListOf(price)
+        } else {
+            map[stock]!!.add(price)
+        }
+    }
+    return map.mapValues { it.value.average() }
+}
 /**
  * Средняя (4 балла)
  *
@@ -214,8 +224,8 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
 
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
 /**
  * Средняя (3 балла)
  *

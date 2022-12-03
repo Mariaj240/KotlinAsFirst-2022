@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import java.time.format.DateTimeFormatter
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -75,7 +77,6 @@ fun main() {
  * входными данными.
  */
 fun dateStrToDigit(str: String): String = TODO()
-
 /**
  * Средняя (4 балла)
  *
