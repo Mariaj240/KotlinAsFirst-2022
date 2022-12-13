@@ -156,7 +156,7 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Map<Strin
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
     val peopleList = mutableListOf<String>()
-    if (a.isEmpty() || b.isEmpty()) return peopleList
+    if (a.isEmpty() || b.isEmpty()) return mutableListOf("")
     for (i in 0 until a.size) {
             if (a[i] == b[i]) peopleList.add(a[i])
         }
