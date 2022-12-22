@@ -2,7 +2,10 @@
 
 package lesson7.task1
 
+import ru.spbstu.wheels.NullableMonad.map
+import java.io.BufferedReader
 import java.io.File
+import java.io.FileReader
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -82,7 +85,20 @@ fun deleteMarked(inputName: String, outputName: String) {
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
  *
  */
-fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
+    val inputData = File(inputName).readText().lowercase();
+    val ans = mutableMapOf<String, Int>()
+    for (str in substrings) {
+        var lastIndex = inputData.indexOf(str.lowercase(), 0)
+        var count = 0
+        while (lastIndex >= 0) {
+            count++
+            lastIndex = inputData.indexOf(str.lowercase(), lastIndex + 1)
+        }
+        ans[str] = count
+    }
+    return ans
+}
 
 
 /**
@@ -99,7 +115,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+  TODO()
 }
 
 /**
