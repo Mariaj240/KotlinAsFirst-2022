@@ -222,14 +222,14 @@ fun bestHighJump(jumps: String): Int {
 fun plusMinus(expression: String): Int {
     if (!expression.matches("""([0-9]*(\s+((\+)|(\-))+\s+[0-9]*))*|[0-9]*""".toRegex())) throw IllegalArgumentException()
     val exp = expression.split(" ")
-    var result = 0
-    val res = exp.first().toInt()
+    //var result = 0
+    var res = exp.first().toInt()
     for (i in exp.indices) {
-        if (exp[i] == "+") result += res + exp[i + 1].toInt()
-        else if (exp[i] == "-") result -= exp[i + 1].toInt() + res
+        if (exp[i] == "+") res += exp[i + 1].toInt()
+        else if (exp[i] == "-") res -= exp[i + 1].toInt()
+
     }
-    if (expression.matches("""\d*""".toRegex())) return res
-    return result
+    return res
 }
 
 /**
