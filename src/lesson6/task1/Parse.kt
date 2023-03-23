@@ -227,7 +227,6 @@ fun plusMinus(expression: String): Int {
     for (i in exp.indices) {
         if (exp[i] == "+") res += exp[i + 1].toInt()
         else if (exp[i] == "-") res -= exp[i + 1].toInt()
-
     }
     return res
 }
@@ -241,7 +240,9 @@ fun plusMinus(expression: String): Int {
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+   TODO()
+}
 
 /**
  * Сложная (6 баллов)

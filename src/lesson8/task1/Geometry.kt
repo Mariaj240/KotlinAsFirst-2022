@@ -2,7 +2,7 @@
 
 package lesson8.task1
 
-import lesson1.task1.sqr
+import lesson3.task1.task1.sqr
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
