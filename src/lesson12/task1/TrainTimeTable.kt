@@ -4,35 +4,6 @@ package lesson12.task1
 
 import ru.spbstu.kotlin.typeclass.classes.Monoid.Companion.plus
 
-fun main() {
-    val train = Train(
-        "First", listOf<Stop>(
-            Stop("stat1", Time(5, 15)),
-            Stop("stat12", Time(6, 5)),
-            Stop("stat25", Time(8, 45))
-        )
-    )
-    val train1 = Train(
-        "Second", listOf<Stop>(
-            Stop("stat2", Time(2, 20)),
-            Stop("stat49", Time(4, 30)),
-            Stop("stat3", Time(5, 7)),
-            Stop("stat4", Time(9, 19))
-        )
-    )
-    val test = TrainTimeTable("stat5")
-//    test.addTrain("Third", Time(2, 15), Stop("stat6", Time(4, 30)))
-//    test.addTrain("Forth", Time(1, 45), Stop("stat7", Time(5, 7)))
-    test.addTrain("Fifth", Time(6, 8), Stop("stat8", Time(7, 35)))
-//    test.addTrain("Sixth", Time(0, 50), Stop("stat9", Time(1, 0)))
-
-//    test.addStop("Sixth", Stop("stat3", Time(2, 15)))
-    test.addStop("Fifth", Stop("stat2", Time(3, 6)))
-//    test.addStop("First", Stop("stat5", Time(4, 56)))
-    test.addStop("Fifth", Stop("stat8", Time(6, 19)))
-}
-
-
 /**
  * Класс "расписание поездов".
  *

@@ -1,38 +1,8 @@
 @file:Suppress("UNUSED_PARAMETER")
 
 package lesson11.task1
-
-
 import java.lang.reflect.Array.set
 import kotlin.math.min
-
-fun main() {
-    val convertedValue: CheckValue = CheckValue()
-    val kilo: DimensionalValue = DimensionalValue(30.0, "Kg")
-    val mili: DimensionalValue = DimensionalValue(15.0, "mg")
-    val sum = kilo.plus(mili)
-    val uMinus = kilo.unaryMinus()
-    val minus = kilo.minus(mili)
-    val multiplication = kilo.times(mili.value)
-    val division = kilo.div(mili)
-    val equal = kilo.equals(mili)
-    val compare = kilo.compareTo(mili)
-    println(compare)
-//    println(equal)
-//    println(division)
-//    println(multiplication.vlue)
-//    println(minus.vlue)
-//    println(uMinus.vlue)
-//    println(sum.vlue)
-//    println(kilo.dim)
-//    println(kilo.vlue)
-//    println(mili.dim)
-//    println(mili.vlue)
-}
-
-class CheckValue() {
-
-}
 
 
 /**
